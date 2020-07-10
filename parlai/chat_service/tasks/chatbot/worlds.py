@@ -31,18 +31,21 @@ class MessengerBotChatTaskWorld(World):
     """
 
     MAX_AGENTS = 1
-    MODEL_KEY = 'legacy_seq2seq'
+    MODEL_KEY = 'blender_90M'
 
     def __init__(self, opt, agent, bot):
         self.agent = agent
         self.episodeDone = False
         self.model = bot
+        print(self.model)
         self.first_time = True
 
     @staticmethod
     def generate_world(opt, agents):
         if opt['models'] is None:
             raise RuntimeError("Model must be specified")
+
+        print("The shared_bot_params \n" + str(opt['shared_bot_params'][MessengerBotChatTaskWorld.MODEL_KEY]))
         return MessengerBotChatTaskWorld(
             opt,
             agents[0],
@@ -67,6 +70,7 @@ class MessengerBotChatTaskWorld(World):
             )
             self.first_time = False
         a = self.agent.act()
+
         if a is not None:
             if '[DONE]' in a['text']:
                 self.episodeDone = True
@@ -79,7 +83,6 @@ class MessengerBotChatTaskWorld(World):
                 print("===response====")
                 print(response)
                 print("~~~~~~~~~~~")
-                response['id'] = ''
                 self.agent.observe(response)
 
     def episode_done(self):
@@ -115,6 +118,7 @@ class MessengerOverworld(World):
 
     def parley(self):
         if self.first_time:
+
             self.agent.observe(
                 {
                     'id': 'Overworld',

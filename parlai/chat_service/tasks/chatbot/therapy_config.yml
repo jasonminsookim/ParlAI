@@ -4,7 +4,7 @@ tasks:
     task_world: MessengerBotChatTaskWorld
     timeout: 1800
     agents_required: 1
-task_name: chatbot
+task_name: blended_skill_talk_therapy
 world_module: parlai.chat_service.tasks.chatbot.worlds
 overworld: MessengerOverworld
 max_workers: 30
@@ -13,8 +13,15 @@ opt:
   models:
     blender_90M:
       model: transformer/generator
-      model_file: zoo:blender/blender_90M/model
+      model_file: tmp/model_2/TRIAL_2
       interactive_mode: True
       no_cuda: True
+  override:
+    model: tmp/model_2
+    model_file: tmp/model_2/TRIAL_2
+
+
+
 additional_args:
   page_id: 1 # Configure Your Own Page
+
