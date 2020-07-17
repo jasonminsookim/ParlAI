@@ -57,6 +57,7 @@ class MessageSocketHandler(WebSocketHandler):
                 attachment dict structure.
         """
         logging.info('websocket message from client: {}'.format(message_text))
+        print(message_text)
         message = json.loads(message_text)
         message = {
             'text': message.get('text', ''),
@@ -64,6 +65,7 @@ class MessageSocketHandler(WebSocketHandler):
             'sender': {'id': self.sid},
             'recipient': {'id': 0},
         }
+        print(message)
         self.message_callback(message)
 
     def check_origin(self, origin):
