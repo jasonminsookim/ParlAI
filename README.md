@@ -47,7 +47,7 @@ All needed data will be downloaded to `~/ParlAI/data`, and any non-data files if
 
 ## Add Custom Blenderbot Model
 
- - Download the model files from [Google Drive] (https://drive.google.com/drive/folders/1AL3c3qhbuaU9bkBN068lrYzztieXEecE?usp=sharing)
+ - Download the model files from [Google Drive](https://drive.google.com/drive/folders/1AL3c3qhbuaU9bkBN068lrYzztieXEecE?usp=sharing)
  - Create a directory in the project root named 'tmp'
  - Copy all the files downloaded from Google Drive into the 'tmp' folder
 
