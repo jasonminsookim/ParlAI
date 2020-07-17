@@ -45,6 +45,12 @@ This is the recommended installation procedure, as it provides ready access to t
 
 All needed data will be downloaded to `~/ParlAI/data`, and any non-data files if requested will be downloaded to `~/ParlAI/downloads`. If you need to clear out the space used by these files, you can safely delete these directories and any files needed will be downloaded again.
 
+## Add Custom Blenderbot Model
+
+ - Download the model files from [Google Drive] (https://drive.google.com/drive/folders/1AL3c3qhbuaU9bkBN068lrYzztieXEecE?usp=sharing)
+ - Create a directory in the project root named 'tmp'
+ - Copy all the files downloaded from Google Drive into the 'tmp' folder
+
 ## Documentation
 
  - [Quick Start](https://parl.ai/docs/tutorial_quick.html)
