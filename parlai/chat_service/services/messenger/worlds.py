@@ -35,7 +35,7 @@ class SimpleMessengerOverworld(World):
 class OnboardWorld(World):
     def __init__(self, opt, agent):
         self.agent = agent
-        self.episodeDone = False
+        self.episodeDone = True
 
     @staticmethod
     def generate_world(opt, agents):

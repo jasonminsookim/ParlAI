@@ -8,6 +8,7 @@
 
 from parlai.core.worlds import World
 from parlai.chat_service.services.messenger.worlds import OnboardWorld
+from parlai.chat_service.services.messenger.worlds import SimpleMessengerOverworld
 from parlai.core.agents import create_agent_from_shared
 
 
@@ -37,15 +38,14 @@ class MessengerBotChatTaskWorld(World):
         self.agent = agent
         self.episodeDone = False
         self.model = bot
-        print(self.model)
-        self.first_time = True
+        self.first_time = False
 
     @staticmethod
     def generate_world(opt, agents):
         if opt['models'] is None:
             raise RuntimeError("Model must be specified")
 
-        print("The shared_bot_params \n" + str(opt['shared_bot_params'][MessengerBotChatTaskWorld.MODEL_KEY]))
+      #  print("The shared_bot_params \n" + str(opt['shared_bot_params'][MessengerBotChatTaskWorld.MODEL_KEY]))
         return MessengerBotChatTaskWorld(
             opt,
             agents[0],
@@ -59,31 +59,19 @@ class MessengerBotChatTaskWorld(World):
         agents[0].disp_id = 'ChatbotAgent'
 
     def parley(self):
-        if self.first_time:
-            self.agent.observe(
-                {
-                    'id': 'World',
-                    'text': 'Welcome to the ParlAI Chatbot demo. '
-                    'You are now paired with a bot - feel free to send a message.'
-                    'Type [DONE] to finish the chat.',
-                }
-            )
-            self.first_time = False
+        self.first_time = False
         a = self.agent.act()
 
         if a is not None:
-            if '[DONE]' in a['text']:
-                self.episodeDone = True
-            else:
-                print("===act====")
-                print(a)
-                print("~~~~~~~~~~~")
-                self.model.observe(a)
-                response = self.model.act()
-                print("===response====")
-                print(response)
-                print("~~~~~~~~~~~")
-                self.agent.observe(response)
+            print("===act====")
+            print(a)
+            print("~~~~~~~~~~~")
+            self.model.observe(a)
+            response = self.model.act()
+            print("===response====")
+            print(response)
+            print("~~~~~~~~~~~")
+            self.agent.observe(response)
 
     def episode_done(self):
         return self.episodeDone
@@ -117,26 +105,8 @@ class MessengerOverworld(World):
         return self.episodeDone
 
     def parley(self):
-        if self.first_time:
 
-            self.agent.observe(
-                {
-                    'id': 'Overworld',
-                    'text': 'Welcome to the overworld for the ParlAI messenger '
-                    'chatbot demo. Please type "begin" to start.',
-                    'quick_replies': ['begin'],
-                }
-            )
-            self.first_time = False
-        a = self.agent.act()
-        if a is not None and a['text'].lower() == 'begin':
-            self.episodeDone = True
-            return 'default'
-        elif a is not None:
-            self.agent.observe(
-                {
-                    'id': 'Overworld',
-                    'text': 'Invalid option. Please type "begin".',
-                    'quick_replies': ['begin'],
-                }
-            )
+        self.first_time = False
+        #a = self.agent.act()
+        self.episodeDone = True
+        return 'default'
