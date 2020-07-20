@@ -8,7 +8,6 @@
 
 from parlai.core.worlds import World
 from parlai.chat_service.services.messenger.worlds import OnboardWorld
-from parlai.chat_service.services.messenger.worlds import SimpleMessengerOverworld
 from parlai.core.agents import create_agent_from_shared
 
 
@@ -69,6 +68,7 @@ class MessengerBotChatTaskWorld(World):
             self.model.observe(a)
             response = self.model.act()
             print("===response====")
+            response['text']
             print(response)
             print("~~~~~~~~~~~")
             self.agent.observe(response)
