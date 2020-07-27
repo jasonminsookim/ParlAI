@@ -68,6 +68,7 @@ class MessengerBotChatTaskWorld(World):
             self.model.observe(a)
             response = self.model.act()
             print("===response====")
+            print(self.model)
             response['text']
             print(response)
             print("~~~~~~~~~~~")

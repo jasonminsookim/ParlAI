@@ -19,5 +19,7 @@ opt:
   override:
     model: tmp/model_2
     model_file: tmp/model_2/TRIAL_2
+    icands: fixed
 additional_args:
   page_id: 1 # Configure Your Own Page
+# Change to add candidates
